@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Player index{% endblock %}
+
+{% block body %}
+    <h1>Player index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+                <th>Poste</th>
+                <th>Biographie</th>
+                <th>Pied</th>
+                <th>Born_at</th>
+                <th>Lieu_de_naissance</th>
+                <th>Pays_de_naissance</th>
+                <th>Taille</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.id }}</td>
+                <td>{{ player.name }}</td>
+                <td><img src="{{ player.image }}" alt="{{ player.name }}"></td>
+                <td>{{ player.poste }}</td>
+                <td>{{ player.biographie }}</td>
+                <td>{{ player.pied }}</td>
+                <td>{{ player.bornAt ? player.bornAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ player.lieuDeNaissance }}</td>
+                <td>{{ player.paysDeNaissance }}</td>
+                <td>{{ player.taille }}</td>
+                <td>
+                    <a href="{{ path('app_player_show', {'id': player.id}) }}">show</a>
+                    <a href="{{ path('app_player_edit', {'id': player.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_player_new') }}">Create new</a>
+{% endblock %}

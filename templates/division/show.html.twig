@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+		{% block title %}
+			{{ division.name }}
+		{% endblock %}
+
+		{% block body %}
+			<h1 class=" text-gray-800 mb-4">
+				{{ division.name }}
+			</h1>
+
+
+			<div class="overflow-x-auto">
+				<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+					<thead class="bg-gray-800 text-white">
+						<tr>
+							<th class="px-4 py-2 text-left">
+								Position
+							</th>
+							<th class="px-4 py-2 text-left">
+								Name
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if division.clubs %}
+							{% for club in division.clubs %}
+								<tr class="border-b border-gray-200 hover:bg-gray-100">
+									<td class="px-4 py-2">
+										{{club.position}}
+									</td>
+									<td class="px-4 py-2">
+										<a href="{{ path('app_club_show', {'id': club.id}) }}" class="text-blue-600 hover:underline">
+											{{ club.name }}
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+							<tr>
+								<td colspan="2" class="px-4 py-2 text-center">
+									No records found
+								</td>
+							</tr>
+						{% endif %}
+					</tbody>
+				</table>
+			</div>
+
+			<a href="{{ path('app_division_index') }}" class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">
+				Back to list
+			</a>
+
+		{% endblock %}
